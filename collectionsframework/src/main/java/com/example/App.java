@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+
+import com.sun.source.tree.WhileLoopTree;
 
 /**
  * El Framework de Collections:
@@ -54,6 +57,61 @@ public class App {
 		 */
 
 		System.out.println(personas);
+
+		/*
+		 * Traversing Collections
+		 * 
+		 * En primer lugar:
+		 * 
+		 * https://docs.oracle.com/javase/tutorial/collections/interfaces/collection.
+		 * html
+		 * 
+		 * En segundo lugar ver el documento Arrays, Generics and collection Framework
+		 */
+
+		/*
+		 * Existen 3 formas de recorrer una coleccion de las cuales solamente una
+		 * permite eliminar elementos de la coleccion a la vez que se recorre:
+		 * 
+		 * 1- utilizando un iterador es dicir interfaz iterator<E>, que es la unica
+		 * forma de eliminar un elemento de la colleccion a la misma vez que se recorrer
+		 * 
+		 * 2- utilizando una sentencia for mejorada
+		 * 
+		 * 3- (la variante sugerencia la mejor) utilizando operaciones de agregados en
+		 * decir programacion funcional metodos de clase stream metodos de referencia y
+		 * operaciones lambda
+		 */
+
+		/*
+		 * variante #1 de recorrer/iterar sobre coleccion es decir utilizando un
+		 * iterador a modo de ejemplo vamos a recorrer la coleccion de personas y
+		 * eliminar las personas de genero HOMBRE
+		 */
+
+		System.out.println("-------------- Listado original de personas ----------------------");
+		System.out.println(personas);
+
+		Iterator<Persona> it = personas.iterator();
+
+		while (it.hasNext()) {
+			if (it.next().genero().equals(Genero.HOMBRE)) {
+				it.remove();
+			}
+		}
+		System.out.println("--- Listado resultante luego de eliminar las " + " personas del genero HOMBRE ---");
+		System.out.println(personas);
+
+		/*
+		 * Ejercicio #1.
+		 * 
+		 * Utilizando un Iterador eliminar del listado de personas aquellas que sean del
+		 * hOMBRE y el nombre tenga 6 caracteres
+		 * 
+		 * para la solucion: hacer un commit del estado actual y posteriormente eliminar
+		 * o comentar el codigo del uso del itereador anterior para tener la lista de
+		 * personas original
+		 */
 
 	}
 
