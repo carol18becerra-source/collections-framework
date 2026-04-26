@@ -29,8 +29,9 @@ public class App {
 		// ejemplo de creacion de kista (coleccion) utilizando el metodo add(),
 		// que es polimorfico para agregar elementos a la lista
 
-		var personas = new ArrayList<Persona>();
-
+		// var realmente es List<Persona>
+		var personas  = new ArrayList<Persona>();
+		
 		var persona1 = Persona.builder().nombre("Duglas").primerApellido("Taydron").segundoApellido("Gonzalez")
 				.fechadenacimiento(LocalDate.of(1995, Month.JANUARY, 20)).genero(Genero.HOMBRE).build();
 
@@ -43,10 +44,10 @@ public class App {
 		var persona4 = Persona.builder().nombre("Jeronimo").primerApellido("Arenal").segundoApellido("Gomez")
 				.fechadenacimiento(LocalDate.of(1989, Month.MAY, 22)).genero(Genero.HOMBRE).build();
 
-		personas.add(persona1);
-		personas.add(persona2);
-		personas.add(persona3);
-		personas.add(persona4);
+			//		personas.add(persona1);
+			//		personas.add(persona2);
+			//		personas.add(persona3);
+			//		personas.add(persona4);
 		
 		
 		/*En lugar de invocar el metodo add 4 veces como se ha mostrado anteriormente, se podria y es preferible agregar elementos a la lista de personas de la 
