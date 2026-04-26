@@ -112,6 +112,17 @@ public class App {
 		 * o comentar el codigo del uso del itereador anterior para tener la lista de
 		 * personas original
 		 */
+		
+		Iterator<Persona> it = personas.iterator();
+		
+		while (it.hasNext()) {
+			var persona = it.next();
+			if (persona.genero().equals(Genero.HOMBRE) && persona.nombre().length() == 6) {
+				it.remove();
+			}
+			System.out.println(" ---- Listado Resultante ----");
+			System.out.println(personas);
+		}
 
 	}
 
