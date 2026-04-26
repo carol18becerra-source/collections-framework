@@ -30,41 +30,30 @@ public class App {
 		// que es polimorfico para agregar elementos a la lista
 
 		// var realmente es List<Persona>
-		var personas  = new ArrayList<Persona>();
-		
-		var persona1 = Persona.builder().nombre("Duglas").primerApellido("Taydron").segundoApellido("Gonzalez")
-				.fechadenacimiento(LocalDate.of(1995, Month.JANUARY, 20)).genero(Genero.HOMBRE).build();
+		var personas = new ArrayList<Persona>();
 
-		var persona2 = Persona.builder().nombre("Carolina").primerApellido("Garzon").segundoApellido("Becerra")
-				.fechadenacimiento(LocalDate.of(2000, Month.OCTOBER, 10)).genero(Genero.MUJER).build();
+		personas.add(
 
-		var persona3 = Persona.builder().nombre("Maria").primerApellido("Garzon").segundoApellido("Gonzalez")
-				.fechadenacimiento(LocalDate.of(2005, Month.DECEMBER, 14)).genero(Genero.MUJER).build();
+				Persona.builder().nombre("Duglas").primerApellido("Taydron").segundoApellido("Gonzalez")
+						.fechadenacimiento(LocalDate.of(1995, Month.JANUARY, 20)).genero(Genero.HOMBRE).build());
 
-		var persona4 = Persona.builder().nombre("Jeronimo").primerApellido("Arenal").segundoApellido("Gomez")
-				.fechadenacimiento(LocalDate.of(1989, Month.MAY, 22)).genero(Genero.HOMBRE).build();
+		personas.add(Persona.builder().nombre("Carolina").primerApellido("Garzon").segundoApellido("Becerra")
+				.fechadenacimiento(LocalDate.of(2000, Month.OCTOBER, 10)).genero(Genero.MUJER).build());
+		personas.add(Persona.builder().nombre("Maria").primerApellido("Garzon").segundoApellido("Gonzalez")
+				.fechadenacimiento(LocalDate.of(2005, Month.DECEMBER, 14)).genero(Genero.MUJER).build());
 
-			//		personas.add(persona1);
-			//		personas.add(persona2);
-			//		personas.add(persona3);
-			//		personas.add(persona4);
-		
-		
-		/*En lugar de invocar el metodo add 4 veces como se ha mostrado anteriormente, se podria y es preferible agregar elementos a la lista de personas de la 
-		 * forma siguiente:*/
-		
-		personas = (ArrayList<Persona>)Arrays.asList(persona1,persona2,persona3,persona4);
-		
+		personas.add(
+
+				Persona.builder().nombre("Jeronimo").primerApellido("Arenal").segundoApellido("Gomez")
+						.fechadenacimiento(LocalDate.of(1989, Month.MAY, 22)).genero(Genero.HOMBRE).build());
 
 		/*
-		 * si la lista de personas apunto a null, entonces no podemos agregar elementos
-		 * Persona a dicho lista porque no hemos resevado memoria para la lista
-		 * 
-		 * ¿ y como se reserva memoria para la lista de persona?
-		 * 
-		 * utilizando el constructor de alguna de las clases que implementa la interfaz
-		 * List
+		 * La lista resultante personas no es de tamaño fijo porque no se ha obtenido a
+		 * partir un aray por lo cual le puedo agregar o eliminar elementos persona
+		 * cuando quiera
 		 */
+
+		System.out.println(personas);
 
 	}
 
