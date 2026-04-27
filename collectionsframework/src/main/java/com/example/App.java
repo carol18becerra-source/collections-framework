@@ -273,6 +273,14 @@ public class App {
 		 * 
 		 * */
 		
+		/*Hasta el momento hemos creado colecciones List en este caso asignando memoria a traves de los 
+		 * constructores de las clases que implementan la interfaz para posteriormente utilizar el metodo add()
+		 * y tambien a partir de un array que daria como resultado una coleccion de tamaño fijo 
+		 * ¿como crear una coleccion inmutable, es decir, que no se pueda modificar ni agregar ni eliminar 
+		 * elementos ni modificarlos?*/
+		
+		List<String> listaInmutable = List.of("Jeronimo","Duglas","Carolina");
+		
 
 	}
 
