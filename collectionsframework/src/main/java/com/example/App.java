@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * El Framework de Collections:
@@ -178,14 +177,42 @@ public class App {
 		 * interfaz pero tambien a partir de una clase abstracta
 		 */
 
-		personas.stream().filter(new Predicate<Persona>() {
+//		personas.stream().filter(new Predicate<Persona>() {
+//
+//			@Override
+//			public boolean test(Persona p) {
+//				// TODO Auto-generated method stub
+//				return p.genero().equals(Genero.MUJER);
+//			}
+//		});
 
-			@Override
-			public boolean test(Persona p) {
-				// TODO Auto-generated method stub
-				return p.genero().equals(Genero.MUJER);
-			}
-		});
+		/*
+		 * El uso de clase anonima o mejor dicho de la expresion de clase anonima es
+		 * mucho mejor que la implementacion de la clase filtro pero todavia continua
+		 * siendo una exageracion si no se van a declarar variables adicionales ni se va
+		 * a implementar otra cosa que sea el metodo abstacto de la interfaz funcional
+		 * predicate
+		 * 
+		 * 
+		 * Y se hace la luz y aparece las EXPRESIONES LAMBDA
+		 * 
+		 * ¿Que es una expresion lambda?
+		 * 
+		 * una expresion lambda hay que verla como un "metodo anonimo" por lo general se
+		 * utilizan para implementar el metodo abtracto de las interfaces funcionales
+		 * 
+		 * concretamente para el ejemplo que estamos desarrallando ahora vamos a
+		 * centrarnos en el metodo test
+		 * 
+		 * NOTA IMPORTANTE SOBRE LAS LAMBDAS Y LAS CLAVES ANOMIMAS
+		 * 
+		 * tanto las clases anonimas como las expresiones lambda solamente se pueden relacionar con variables
+		 * locales (declaradas dentro de metodos) que sean explicitamente final o effectivel final (en efecto final)
+		 * 
+		 */
+
+		personas.stream().filter(p -> p.genero().equals(Genero.MUJER));
+
 	}
 
 }
