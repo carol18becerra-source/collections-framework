@@ -112,9 +112,9 @@ public class App {
 		 * o comentar el codigo del uso del itereador anterior para tener la lista de
 		 * personas original
 		 */
-		
+
 		Iterator<Persona> it = personas.iterator();
-		
+
 		while (it.hasNext()) {
 			var persona = it.next();
 			if (persona.genero().equals(Genero.HOMBRE) && persona.nombre().length() == 6) {
@@ -122,6 +122,21 @@ public class App {
 			}
 			System.out.println(" ---- Listado Resultante ----");
 			System.out.println(personas);
+		}
+
+		/*
+		 * VARIANTE # 2 de Iterar o recorrer una coleccion. Utilizando una sentencia for
+		 * mejorada
+		 *
+		 * A modo de ejemplo, intentemos recorrer la lista de personas y eliminar las
+		 * personas del genero mujer, para comprobar que no es posible eliminar un
+		 * elemento de la coleccion mientras se recorre utilizando un for mejorado
+		 */
+
+		for (var p : personas) {
+
+			if (p.genero().equals(Genero.MUJER))
+				personas.remove(p);
 		}
 
 	}
