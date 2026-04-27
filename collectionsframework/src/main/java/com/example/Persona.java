@@ -6,12 +6,14 @@ import java.time.LocalDate;
 
 @Builder
 
-
 public record Persona(
-	String nombre,
-	String primerApellido,
-	String segundoApellido,
-	LocalDate fechadenacimiento,
-	Genero genero){
+		String nombre,
+		String primerApellido,
+		String segundoApellido,
+		LocalDate fechadenacimiento,
+		Genero genero, 
+		Double salario
+
+) {
 
 }

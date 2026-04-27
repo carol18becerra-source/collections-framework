@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import com.sun.source.tree.WhileLoopTree;
-
 /**
  * El Framework de Collections:
  * https://docs.oracle.com/javase/tutorial/collections/index.html
@@ -38,17 +36,21 @@ public class App {
 		personas.add(
 
 				Persona.builder().nombre("Duglas").primerApellido("Taydron").segundoApellido("Gonzalez")
-						.fechadenacimiento(LocalDate.of(1995, Month.JANUARY, 20)).genero(Genero.HOMBRE).build());
+						.fechadenacimiento(LocalDate.of(1995, Month.JANUARY, 20)).genero(Genero.HOMBRE).salario(3500.50)
+						.build());
 
 		personas.add(Persona.builder().nombre("Carolina").primerApellido("Garzon").segundoApellido("Becerra")
-				.fechadenacimiento(LocalDate.of(2000, Month.OCTOBER, 10)).genero(Genero.MUJER).build());
+				.fechadenacimiento(LocalDate.of(2000, Month.OCTOBER, 10)).genero(Genero.MUJER).salario(3600.45)
+				.build());
 		personas.add(Persona.builder().nombre("Maria").primerApellido("Garzon").segundoApellido("Gonzalez")
-				.fechadenacimiento(LocalDate.of(2005, Month.DECEMBER, 14)).genero(Genero.MUJER).build());
+				.fechadenacimiento(LocalDate.of(2005, Month.DECEMBER, 14)).genero(Genero.MUJER).salario(3650.45)
+				.build());
 
 		personas.add(
 
 				Persona.builder().nombre("Jeronimo").primerApellido("Arenal").segundoApellido("Gomez")
-						.fechadenacimiento(LocalDate.of(1989, Month.MAY, 22)).genero(Genero.HOMBRE).build());
+						.fechadenacimiento(LocalDate.of(1989, Month.MAY, 22)).genero(Genero.HOMBRE).salario(4200.25)
+						.build());
 
 		/*
 		 * La lista resultante personas no es de tamaño fijo porque no se ha obtenido a
@@ -80,7 +82,7 @@ public class App {
 		 * 
 		 * 3- (la variante sugerencia la mejor) utilizando operaciones de agregados en
 		 * decir programacion funcional metodos de clase stream metodos de referencia y
-		 * operaciones lambda
+		 * expresiones lambda
 		 */
 
 		/*
@@ -112,6 +114,47 @@ public class App {
 		 * o comentar el codigo del uso del itereador anterior para tener la lista de
 		 * personas original
 		 */
+
+		/**
+		 * OPERACIONES DE AGREGADO PARA RECORRER LAS COLECCIONES
+		 * 
+		 * https://docs.oracle.com/javase/tutorial/collections/streams/index.html
+		 * 
+		 * Ejemplo: calcular el salario promedio de las personas del genero MUJER
+		 * 
+		 * Las operaciones de agregado implican convertir la coleccion en un flujo
+		 * stream de elementos que circular por una tuberia imaginaria o pipeline por la
+		 * tuberio o pipeline se entiende una secuencia de metodos de clase Stream es
+		 * decir una sentencia de operaciones de agregado es decir metodos que para
+		 * obtener un resultado agrupan elementos del flujo
+		 * 
+		 * 
+		 * una tuberia o pipeline tine un origen que puede ser un array, una coleccion,
+		 * un socket, un fichero una consulta de base de datos, etc, tambien la tubiria
+		 * tiene cero o muchas operaciones intermedias y UNA SOLA operacione terminal
+		 * 
+		 * lo primero es utlizar el metodo stream (), que tambien podria ser
+		 * parallelStream(), para convertir la coleccion en un flujo de elementos del
+		 * mismo tipo de coleccion
+		 * 
+		 * A partir de tener un flujo de elementos entrar a funcionar los metodos de la
+		 * clase Stream, operaciones intermedias como podria ser el metodo filter para
+		 * permitir que solamente circule al proximo nivel de la tuberia las personas
+		 * del Genero MUJER
+		 * 
+		 * predicate es una interfaz funcional es decir  un tipo de interfaz que puede tener metodos por defecto que 
+		 * tiene cuerpo metodos estaticos etc., pero SOLAMENTE UN METODO ABSTRACTO. un predicate es una condicion que tiene 
+		 * que cumplir un elemento que circula por la tuberia o p
+		 * 
+		 */
+		
+		//Stream<Persona> flujodePersona = personas.stream();
+		
+		//Filtro filtro = new Filtro();
+		
+		//personas.stream().filter(filtro);
+		
+		personas.stream().filter(new Filtro());
 
 	}
 
