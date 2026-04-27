@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * El Framework de Collections:
@@ -142,20 +143,49 @@ public class App {
 		 * permitir que solamente circule al proximo nivel de la tuberia las personas
 		 * del Genero MUJER
 		 * 
-		 * predicate es una interfaz funcional es decir  un tipo de interfaz que puede tener metodos por defecto que 
-		 * tiene cuerpo metodos estaticos etc., pero SOLAMENTE UN METODO ABSTRACTO. un predicate es una condicion que tiene 
-		 * que cumplir un elemento que circula por la tuberia o p
+		 * predicate es una interfaz funcional es decir un tipo de interfaz que puede
+		 * tener metodos por defecto que tiene cuerpo metodos estaticos etc., pero
+		 * SOLAMENTE UN METODO ABSTRACTO. un predicate es una condicion que tiene que
+		 * cumplir un elemento que circula por la tuberia o p
 		 * 
 		 */
-		
-		//Stream<Persona> flujodePersona = personas.stream();
-		
-		//Filtro filtro = new Filtro();
-		
-		//personas.stream().filter(filtro);
-		
-		personas.stream().filter(new Filtro());
 
+		// Stream<Persona> flujodePersona = personas.stream();
+
+		// Filtro filtro = new Filtro();
+
+		// personas.stream().filter(filtro);
+
+		// personas.stream().filter(new Filtro());
+
+		/**
+		 * El codigo hasta este momento se consideraria una total exageracion tener que
+		 * crear una clase externa solamente para implementar la intefaz funcional
+		 * predicate
+		 * 
+		 * por lo cual un enfoque mas eficiente seria crear una clase en el mismo sitio
+		 * donde se va a instaniciar el objeto, es decir, juan palomo yo lo guiso yo me
+		 * lo como, y aqui entrar las clases anonimas
+		 * 
+		 * ¿Que es una clase anonima?
+		 * 
+		 * Es en primer lugar una clase que no tiene nombre por lo cual una vez que se
+		 * declara no podria ser utlizada para instanciar un objeto, es decir, una clase
+		 * anonima es una expresion de clase, una expresion que vista con buenos ojos
+		 * parece una clase pero no tiene nombre
+		 * 
+		 * Se puede utilizar una clase anonima para instanciar un objeto a partir de una
+		 * interfaz pero tambien a partir de una clase abstracta
+		 */
+
+		personas.stream().filter(new Predicate<Persona>() {
+
+			@Override
+			public boolean test(Persona p) {
+				// TODO Auto-generated method stub
+				return p.genero().equals(Genero.MUJER);
+			}
+		});
 	}
 
 }
