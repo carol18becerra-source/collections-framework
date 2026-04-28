@@ -5,6 +5,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -298,24 +299,55 @@ public class App {
 		/*
 		 * Intentar ordenar la lista de personaslist
 		 * 
-		 * El  codigo siguiente da error porque el tipo persona no implementa la interfaz comparable 
-		 * de persona a diferencia de todos los tipos de buit-in de java que si implementan dicho interfaz 
+		 * El codigo siguiente da error porque el tipo persona no implementa la interfaz
+		 * comparable de persona a diferencia de todos los tipos de buit-in de java que
+		 * si implementan dicho interfaz
 		 * 
-		 * a modo de ejemplo: vamos a establecer un criterio de ordenamiento para que se ordene el listado 
-		 * de persona, primero por le primer apellido, luego el segundo apellido, y si hay dos personas con 
-		 * el mismo primer y segundo apellido que determine el nombre
+		 * a modo de ejemplo: vamos a establecer un criterio de ordenamiento para que se
+		 * ordene el listado de persona, primero por le primer apellido, luego el
+		 * segundo apellido, y si hay dos personas con el mismo primer y segundo
+		 * apellido que determine el nombre
 		 */
 
 		Collections.sort(personas);
-		
+
 		// Mostrar la lista de personas resultantes
 		personas.stream().forEach(persona -> System.out.println(persona));
-		
-		
-		/*¿Como ordenar la lista de personas en Orden natural inverso es decir
-		lexicograficamentede la z a la A ?*/
-		
-		
+
+		/*
+		 * ¿Como ordenar la lista de personas en Orden natural inverso es decir
+		 * lexicograficamentede la z a la A ?
+		 */
+
+		/*
+		 * Supongamos que el Record persona va a ser utilizado en otro Departamento o en
+		 * otra aplicacion donde no les interesa el orden natural implementado, sino
+		 * ordenar por el salario de menor a mayor
+		 */
+
+		Collections.sort(personas,
+				(persona1, persona2) -> Double.valueOf(persona1.salario()).compareTo(persona2.salario()));
+
+		System.out.println("Listado de personas ordenado por salario de menor a mayor,");
+		personas.forEach(System.out::println);
+
+		// a continuacion otra variante de ordenar por salario
+
+		Collections.sort(personas, Comparator.comparingDouble(Persona::salario));
+		System.out.println("Listado de personas ordenado por salario de menor a mayor,"
+				+ "utilizando metodos de la propia interfaz comparator");
+		personas.forEach(System.out::println);
+
+		/*
+		 * Ejercicio:
+		 * Respetando el Natural ordering, ordenar la lista de personas por el salario
+		 * de mayor a menor es decir es decir en orden inverso
+		 */
+
+		Collections.sort(personas, Comparator.comparingDouble(Persona::salario).reversed());
+
+		System.out.println("Listado de personas ordenado por salario de mayor a menor usando reversed(): ");
+		personas.forEach(System.out::println);
 
 	}
 
