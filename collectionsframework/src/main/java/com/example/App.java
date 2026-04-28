@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -43,7 +44,7 @@ public class App {
 		personas.add(Persona.builder().nombre("Carolina").primerApellido("Garzon").segundoApellido("Becerra")
 				.fechadenacimiento(LocalDate.of(2000, Month.OCTOBER, 10)).genero(Genero.MUJER).salario(3600.45)
 				.build());
-		personas.add(Persona.builder().nombre("Maria").primerApellido("Garzon").segundoApellido("Gonzalez")
+		personas.add(Persona.builder().nombre("Maria").primerApellido("Garzon").segundoApellido("Becerra")
 				.fechadenacimiento(LocalDate.of(2005, Month.DECEMBER, 14)).genero(Genero.MUJER).salario(3650.45)
 				.build());
 
@@ -95,13 +96,13 @@ public class App {
 		System.out.println("-------------- Listado original de personas ----------------------");
 		System.out.println(personas);
 
-		Iterator<Persona> it = personas.iterator();
-
-		while (it.hasNext()) {
-			if (it.next().genero().equals(Genero.HOMBRE)) {
-				it.remove();
-			}
-		}
+//		Iterator<Persona> it = personas.iterator();
+//
+//		while (it.hasNext()) {
+//			if (it.next().genero().equals(Genero.HOMBRE)) {
+//				it.remove();
+//			}
+//		}
 		System.out.println("--- Listado resultante luego de eliminar las " + " personas del genero HOMBRE ---");
 		System.out.println(personas);
 
@@ -220,67 +221,95 @@ public class App {
 
 		// int x = 7;
 
-		
-		// en el codigo siguiente el metodo average() de clase stream devuelve un optional
-		//¿ que el tipo optional?
-		// es un tipo de datos que surgio posteriormente a java 8 y es para proteger al codigo del
+		// en el codigo siguiente el metodo average() de clase stream devuelve un
+		// optional
+		// ¿ que el tipo optional?
+		// es un tipo de datos que surgio posteriormente a java 8 y es para proteger al
+		// codigo del
 		// del peligro NullPointException porque el optional hau que verlo como una caja
-		// donde puede venir el valor esperado o un null y no habria problema porque podemos 
-		// comprobar que hay en la cajita antes de extraer el valor 
-		
-		
+		// donde puede venir el valor esperado o un null y no habria problema porque
+		// podemos
+		// comprobar que hay en la cajita antes de extraer el valor
+
 		OptionalDouble optionalDeSalarioPromedio = personas.stream().filter(p -> p.genero().equals(Genero.MUJER))
-		.mapToDouble(p -> p.salario())
-		.average();
-		
+				.mapToDouble(p -> p.salario()).average();
+
 		double salarioMedio = 0.0;
-		//del optional del salario podemos extraer
-		
+		// del optional del salario podemos extraer
+
 		if (optionalDeSalarioPromedio.isPresent()) {
 			salarioMedio = optionalDeSalarioPromedio.getAsDouble();
-		
+
 		}
-		
-		// otra variable de extraer el promedio del optional de salario medio 
-		
-		double salarioPromedio = personas.stream()
-				.filter(p -> p.genero().equals(Genero.MUJER))
-				.mapToDouble(p -> p.salario())
-				.average().orElse(0);
-		
-		/*Metodo por referencia
+
+		// otra variable de extraer el promedio del optional de salario medio
+
+		double salarioPromedio = personas.stream().filter(p -> p.genero().equals(Genero.MUJER))
+				.mapToDouble(p -> p.salario()).average().orElse(0);
+
+		/*
+		 * Metodo por referencia
 		 * 
-		 * si al expresion lambda lo unido que va a hacer es invocar al metodo que realiza el trabajo es 
-		 * mas efeciente pasar por referencia la direccion de dicho metodo para que realice el trabajo 
+		 * si al expresion lambda lo unido que va a hacer es invocar al metodo que
+		 * realiza el trabajo es mas efeciente pasar por referencia la direccion de
+		 * dicho metodo para que realice el trabajo
 		 * 
-		 * por ejemplo en en el metodo mapToDouble le expresion lambda lo unico que hace es invocar al metodo
-		 * que recupera el salio en este caso en lugar de utilizar una lambda es mas eficiente pasar por referencia
-		 * el propio metodo que recuperar el salario*/
-		
-		double salarioPromedio2 = personas.stream()
-				.filter(p -> p.genero().equals(Genero.MUJER))
-				.mapToDouble(Persona::salario)
-				.average().orElse(0);
-		
-		/*¿La siguiente seria una expresion lambda varilida?
+		 * por ejemplo en en el metodo mapToDouble le expresion lambda lo unico que hace
+		 * es invocar al metodo que recupera el salio en este caso en lugar de utilizar
+		 * una lambda es mas eficiente pasar por referencia el propio metodo que
+		 * recuperar el salario
+		 */
+
+		double salarioPromedio2 = personas.stream().filter(p -> p.genero().equals(Genero.MUJER))
+				.mapToDouble(Persona::salario).average().orElse(0);
+
+		/*
+		 * ¿La siguiente seria una expresion lambda varilida?
 		 * 
 		 * () ->
 		 * 
-		 * Rta. SI
-		 * void imprimir () {
-		 * 		system.out.println("Hola")
-		 * }
+		 * Rta. SI void imprimir () { system.out.println("Hola") }
 		 * 
-		 * */
+		 */
+
+		/*
+		 * Hasta el momento hemos creado colecciones List en este caso asignando memoria
+		 * a traves de los constructores de las clases que implementan la interfaz para
+		 * posteriormente utilizar el metodo add() y tambien a partir de un array que
+		 * daria como resultado una coleccion de tamaño fijo ¿como crear una coleccion
+		 * inmutable, es decir, que no se pueda modificar ni agregar ni eliminar
+		 * elementos ni modificarlos?
+		 */
+
+		List<String> listaInmutable = List.of("Jeronimo", "Duglas", "Carolina");
+
+		/*
+		 * Object Ordering (ordenamiento de objetos)
+		 * 
+		 * https://docs.oracle.com/javase/tutorial/collections/interfaces/order.html
+		 *
+		 */
+
+		List<String> nombre = Arrays.asList("Jeronimo", "Duglas", "Carolina");
+
+		Collections.sort(nombre);
+		System.out.println(nombre);
+
+		/*
+		 * Intentar ordenar la lista de personaslist
+		 * 
+		 * El  codigo siguiente da error porque el tipo persona no implementa la interfaz comparable 
+		 * de persona a diferencia de todos los tipos de buit-in de java que si implementan dicho interfaz 
+		 * 
+		 * a modo de ejemplo: vamos a establecer un criterio de ordenamiento para que se ordene el listado 
+		 * de persona, primero por le primer apellido, luego el segundo apellido, y si hay dos personas con 
+		 * el mismo primer y segundo apellido que determine el nombre
+		 */
+
+		Collections.sort(personas);
 		
-		/*Hasta el momento hemos creado colecciones List en este caso asignando memoria a traves de los 
-		 * constructores de las clases que implementan la interfaz para posteriormente utilizar el metodo add()
-		 * y tambien a partir de un array que daria como resultado una coleccion de tamaño fijo 
-		 * ¿como crear una coleccion inmutable, es decir, que no se pueda modificar ni agregar ni eliminar 
-		 * elementos ni modificarlos?*/
-		
-		List<String> listaInmutable = List.of("Jeronimo","Duglas","Carolina");
-		
+		// Mostrar la lista de personas resultantes
+		personas.stream().forEach(persona -> System.out.println(persona));
 
 	}
 
