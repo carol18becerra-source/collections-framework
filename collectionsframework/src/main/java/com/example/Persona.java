@@ -14,10 +14,16 @@ public record Persona(String nombre, String primerApellido, String segundoApelli
 
 	@Override
 	public int compareTo(Persona persona) {
+		
+		/*resultado de la comparacion por el primer apellido de dos perosnas de la lista personas
+		 * */
+		
+		/*Para que el orden sea lexicograficamente de la z a la A hay que ubicar primero el objeto 
+		 * que se recibe como parametro */
 
-		int cmpPrimerApellido = this.primerApellido.compareTo(persona.primerApellido());
-		int cmpSegundoApellido = this.segundoApellido.compareTo(persona.segundoApellido());
-		int cmpNombre = this.nombre.compareTo(persona.nombre());
+		int cmpPrimerApellido = persona.primerApellido().compareTo(this.primerApellido);
+		int cmpSegundoApellido = persona.segundoApellido().compareTo(this.segundoApellido);
+		int cmpNombre = persona.nombre().compareTo(this.nombre);
 		return cmpPrimerApellido != 0 ? cmpPrimerApellido : cmpSegundoApellido != 0 ?
 				cmpSegundoApellido : cmpNombre;
 	}
