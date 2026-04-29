@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.OptionalDouble;
 
@@ -282,73 +280,55 @@ public class App {
 		 * elementos ni modificarlos?
 		 */
 
+		/*
+		 * Coleccion creada a partir de un array, genera una coleccion de tamaño fijo,
+		 * es decir, que no se puede eliminar ni agregar ningun elemento, pero si se
+		 * puede modificar los elementos
+		 */
+
+		List<Integer> listadoNumerosFixedSize = Arrays.asList(10, 12, 14);
+
+		/*
+		 * coleccion a la cual se le pueden agregar o eliminar elementos en cualquier
+		 * momento
+		 */
+
+		List<Integer> listaVariableSize = new ArrayList<>();
+
+		listaVariableSize.addAll(listadoNumerosFixedSize);
+		listaVariableSize.add(16);
+		listaVariableSize.add(18);
+
+		/*
+		 * se puede generar una lista inmutable con el metodo estatico of y con el
+		 * copyof()
+		 */
 		List<String> listaInmutable = List.of("Jeronimo", "Duglas", "Carolina");
 
-		/*
-		 * Object Ordering (ordenamiento de objetos)
-		 * 
-		 * https://docs.oracle.com/javase/tutorial/collections/interfaces/order.html
-		 *
-		 */
-
-		List<String> nombre = Arrays.asList("Jeronimo", "Duglas", "Carolina");
-
-		Collections.sort(nombre);
-		System.out.println(nombre);
+		List<String> listainmulable2 = List.copyOf(Arrays.asList("Alex", "Sebastian"));
 
 		/*
-		 * Intentar ordenar la lista de personaslist
-		 * 
-		 * El codigo siguiente da error porque el tipo persona no implementa la interfaz
-		 * comparable de persona a diferencia de todos los tipos de buit-in de java que
-		 * si implementan dicho interfaz
-		 * 
-		 * a modo de ejemplo: vamos a establecer un criterio de ordenamiento para que se
-		 * ordene el listado de persona, primero por le primer apellido, luego el
-		 * segundo apellido, y si hay dos personas con el mismo primer y segundo
-		 * apellido que determine el nombre
+		 * Ninguna de las dos colecciones inmutables se pueden ordenar con el metodo
+		 * sort(), de clase collection pero si se pueden convertir a un flujo (Stream)
+		 * de elementos y ordenar dichos elementos que pasan por la tuberia o pipeline
 		 */
 
-		Collections.sort(personas);
+		// Collections.sort(listaInmutable);
 
-		// Mostrar la lista de personas resultantes
-		personas.stream().forEach(persona -> System.out.println(persona));
+		listaInmutable.stream().sorted().forEach(System.out::println);
 
 		/*
-		 * ¿Como ordenar la lista de personas en Orden natural inverso es decir
-		 * lexicograficamentede la z a la A ?
+		 * Ejercicio El listado de personas ordenarlo sin modificar el orden natural,
+		 * por genero y salario que se muestren los que tienen mayor salario primero
 		 */
 
-		/*
-		 * Supongamos que el Record persona va a ser utilizado en otro Departamento o en
-		 * otra aplicacion donde no les interesa el orden natural implementado, sino
-		 * ordenar por el salario de menor a mayor
-		 */
+		System.out.println("Sin modificar el orden natural, por genero " + "y salario mostrando los de mayor "
+				+ "salario primero");
 
-		Collections.sort(personas,
-				(persona1, persona2) -> Double.valueOf(persona1.salario()).compareTo(persona2.salario()));
-
-		System.out.println("Listado de personas ordenado por salario de menor a mayor,");
-		personas.forEach(System.out::println);
-
-		// a continuacion otra variante de ordenar por salario
-
-		Collections.sort(personas, Comparator.comparingDouble(Persona::salario));
-		System.out.println("Listado de personas ordenado por salario de menor a mayor,"
-				+ "utilizando metodos de la propia interfaz comparator");
-		personas.forEach(System.out::println);
-
-		/*
-		 * Ejercicio:
-		 * Respetando el Natural ordering, ordenar la lista de personas por el salario
-		 * de mayor a menor es decir es decir en orden inverso
-		 */
-
-		Collections.sort(personas, Comparator.comparingDouble(Persona::salario).reversed());
-
-		System.out.println("Listado de personas ordenado por salario de mayor a menor usando reversed(): ");
-		personas.forEach(System.out::println);
-
+		personas.stream()
+				.sorted(Comparator.comparing(Persona::genero)
+						.thenComparing(Comparator.comparingDouble(Persona::salario).reversed()))
+				.forEach(System.out::println);
 	}
 
 }
